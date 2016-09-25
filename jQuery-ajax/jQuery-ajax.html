@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery-ajax</title>
+    <script src='./jquery-1.11.2.js'></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    url:'./jQuery.php',
+                    dataType:'json',
+                    type:'get',
+                    success:function(data){
+                        alert(data.username);
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" value='点击' id="btn">
+</body>
+</html>

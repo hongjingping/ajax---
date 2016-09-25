@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生ajax</title>
+    <script>
+        /*对象是无序的键值对，有属性有方法，键是字符串，值就是值，里面的属性还可以是另一个对象*/
+        onload =function(){
+            //第1步.创建xhr对象
+            var xhr = null;
+            //兼容浏览器,旧版本的IE不支持
+            if(window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+            }else{
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            console.log('状态q' + xhr.readyState);
+            //第2步,准备发送请求-配置发送请求的行为参数
+            var type = 'get';
+            var url = './form.php';
+            var async = true;
+            xhr.open(type,url,async);
+            console.log('状态w' + xhr.readyState);
+            //3-1,如果是post请求方式需要设置请求头
+            //xhr.setRequestHeader('Content-Type',"application/x-www-form-urlencoded")
+            //第3步,执行发送的动作
+            xhr.send(null);
+            console.log('状态e' + xhr.readyState);
+            //第4步，指定回调函数
+            xhr.onreadystatechange = function(){
+                console.log('状态t' + xhr.readyState);
+                //该回调函数的执行由浏览器中有readyState的值的变化来控制的
+                if(xhr.readyState == 4){
+                    if(xhr.status == 200){
+                        var data = xhr.responseText;//json
+                        //var data1 = xhr.responseXML;
+                    }
+                }
+            }
+            console.log('状态r' + xhr.readyState);
+
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div id="showInfo"></div>
+    <form >
+        <label for="">用户名</label>
+        <input type="text" name='username' id='username'>
+        <label for="">密码</label>
+        <input type="password" name='password' id='password'>
+        <input type="submit" value='提交' id='btn'>
+    </form>
+</div>
+</body>
+</html>

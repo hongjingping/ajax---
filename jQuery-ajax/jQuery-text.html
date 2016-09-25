@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回纯文本,直接显示在页面上</title>
+    <script src='./jquery-1.11.2.js'></script>
+    <script>
+        $(function(){
+            $("#btn").click(function(){
+                $.ajax({
+                    url:'./jQuery-text.php',
+                    dataType:'text',
+                    type:'get',
+                    success:function(data){
+                        $("#showInfo").html(data);
+                    },
+                    error:function(e){
+                        console.log(e);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" id='btn' value='点击'>
+<div id='showInfo'></div>
+</body>
+</html>

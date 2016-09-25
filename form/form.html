@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单同步请求提交</title>
+    <script>
+        onload = function(){
+            /*window.location.search取出来的就是?flag=1*/
+            var str = window.location.search;
+            console.log(str);
+            //截取flag的值,实际运用中，前后台需要协商，达成一致
+            if(str) {
+                var flag = str.split('=');
+                if(flag[1] == 1){
+                    document.getElementById('showInfo').innerHTML = '注册成功';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div id="showInfo"></div>
+    <form action="./form.php" method='post'>
+        <label for="">用户名</label>
+        <input type="text" name='username'>
+        <label for="">密码</label>
+        <input type="password" name='password'>
+        <input type="submit" value='提交'>
+    </form>
+</div>
+</body>
+</html>

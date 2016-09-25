@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax的回调函数</title>
+</head>
+<body>
+<script>
+    //js是单线程，一次只执行一个队列中的一员
+    var fn = function(){
+        console.log(123);
+    }
+    setTimeout(fn,1000);//回调函数可以使得代码延迟执行
+    console.log(456);
+</script>
+</body>
+</html>

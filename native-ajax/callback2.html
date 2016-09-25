@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回到函数的触发条件</title>
+    <script>
+        //window.onload是页面中所有的标签都加载完成才执行
+        window.onload = function(){
+            console.log(34567);
+        }
+    </script>
+</head>
+<body>
+<input type="button" value='点击' id='btn'>
+<script>
+    //事件函数需要触发才执行,不触发的话就不会执行
+    var btn = document.getElementById('btn');
+    btn.onclick = function(){
+        console.log(12345);
+    }
+</script>
+</body>
+</html>

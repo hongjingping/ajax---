@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍信息</title>
+    <script>
+        onload = function(){
+            var btn = document.getElementById('btn');
+            btn.onclick = function(){
+                //1.创建对象
+                var xhr = null;
+                if(window.XMLHttpRequest){
+                    xhr = new XMLHttpRequest();
+                }else{
+                    xhr = new ActiveXObject();
+                }
+                //2.通过
+                var type = 'get';
+                var url = './data.xml';
+                var async = true;
+                xhr.open(type,url,async);
+                //3.发送请求
+                xhr.send(null);
+                //4，回调函数
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState==4 && xhr.status == 200){
+                        //var data = xhr.responseText;
+                        var data2 = xhr.responseXML;
+                        console.log(data2);
+                        var bs = data2.getElementsByTagName('bookstore')[0];
+                        var books = bs.getElementsByTagName('book');
+                        var tag = '';
+                        for(var i=0;i<books.length;i++){
+                            var book = books[i];
+                            var name = book.getElementsByTagName('name')[0];
+                            var category = book.getElementsByTagName('category')[0];
+                            var desc = book.getElementsByTagName('desc')[0];
+                            tag += '<tr><td>'+getNodeText(name)+'</td><td>'+getNodeText(category)+'</td><td>'+getNodeText(desc)+'</td></tr>';
+                        }
+                        var tbody = document.createElement('tbody');
+                        tbody.innerHTML = tag;
+                        document.getElementById('bookInfo').appendChild(tbody);
+                    }
+                }
+            }
+        }
+        //获取文本节点的内容
+        function getNodeText(node){
+            if(window.ActiveXObject){
+                return node.text;
+            }else{
+                if(node.nodeType == 1){
+                    return node.textContent;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value='点击' id='btn'>
+<div>
+    <table id='bookInfo'>
+
+    </table>
+</div>
+
+</body>
+</html>
